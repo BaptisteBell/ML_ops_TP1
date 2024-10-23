@@ -1,0 +1,13 @@
+name: GitHub Actions
+on: [push]
+jobs:
+  Explore-GitHub-Actions:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: docker compose up -d
+      - run: docker tag ${{ secrets.DOCKER_HUB_USERNAME }}/ML_ops_TP1:latest
+      - run: docker login -u "${{ secrets.DOCKER_HUB_USERNAME }}" --password-stdin
+      - run: docker push ${{ secrets.DOCKER_HUB_USERNAME }}/ML_ops_TP1:latest
+      - run: ssh ubuntu@20.61.171.129 | docker pull ${{ secrets.DOCKER_HUB_USERNAME }}/ML_ops_TP1:latest | docker run ${{ secrets.DOCKER_HUB_USERNAME }}/ML_ops_TP1:latest
+      - rn: "(re)start container"
