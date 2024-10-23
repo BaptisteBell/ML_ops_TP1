@@ -9,5 +9,5 @@ jobs:
       - run: docker tag ${{ secrets.DOCKER_HUB_USERNAME }}/ML_ops_TP1:latest
       - run: echo "${{ secrets.DOCKER_HUB_USERNAME }}" | docker login -u "${{ secrets.DOCKER_HUB_USERNAME }}" --password-stdin
       - run: docker push ${{ secrets.DOCKER_HUB_USERNAME }}/ML_ops_TP1:latest
-      - run: ssh ubuntu@20.61.171.129 | docker pull ${{ secrets.DOCKER_HUB_USERNAME }}/ML_ops_TP1:latest | docker run ${{ secrets.DOCKER_HUB_USERNAME }}/ML_ops_TP1:latest
+      - run: sshpass -p "${{ secrets.VM_PASSWORD }}" ssh -o StrictHostKeyChecking=no ubuntu@20.86.55.5 << 'EOF' | docker pull ${{ secrets.DOCKER_HUB_USERNAME }}/ML_ops_TP1:latest | docker run ${{ secrets.DOCKER_HUB_USERNAME }}/ML_ops_TP1:latest
       - run: "(re)start container"
