@@ -10,4 +10,3 @@ jobs:
       - run: echo "${{ secrets.DOCKER_HUB_PASSWORD }}" | docker login -u "baptisteb" --password-stdin
       - run: docker push baptisteb/ml_ops:latest
       - run: sshpass -p "Supermotdepasse!42" ssh -o StrictHostKeyChecking=no ubuntu@20.86.55.5 << 'EOF' | docker pull baptisteb/ml_ops:latest | docker run baptisteb/ml_ops:latest
-
