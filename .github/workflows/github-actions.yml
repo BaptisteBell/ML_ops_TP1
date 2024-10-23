@@ -6,7 +6,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: docker compose up -d
-      - run: docker tag ml_ops ${{ secrets.DOCKER_HUB_USERNAME }}/ml_ops:latest
-      - run: echo "${{ secrets.DOCKER_HUB_USERNAME }}" | docker login -u "${{ secrets.DOCKER_HUB_USERNAME }}" --password-stdin
+      - run: docker tag ml_ops baptisteb/ml_ops:latest
+      - run: echo "${{ secrets.DOCKER_HUB_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_HUB_USERNAME }}" --password-stdin
       - run: docker push ml_ops
       - run: sshpass -p "Supermotdepasse!42" ssh -o StrictHostKeyChecking=no ubuntu@20.86.55.5 << 'EOF' | docker pull ml_ops | docker run ml_ops
