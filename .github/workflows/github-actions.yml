@@ -5,7 +5,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - run: docker compose up -d
       - run: docker build -t batptisteb/ml_ops:latest.  #  docker tag my-fastapi-app baptisteb/ml_ops:latest
       - run: echo "${{ secrets.DOCKERHUB_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_HUB_USERNAME }}" --password-stdin
       - run: docker push batptisteb/ml_ops:latest
